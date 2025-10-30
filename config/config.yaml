@@ -1,0 +1,90 @@
+# Mask R-CNN Configuration for F1 Vehicle Detection
+
+# Model settings
+model:
+  # Path to pre-trained weights (will be downloaded if not present)
+  weights_path: "data/weights/mask_rcnn_coco.h5"
+  # Alternative: use TensorFlow Hub model
+  # hub_url: "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"
+  
+  # Detection confidence threshold (0.0 to 1.0)
+  confidence_threshold: 0.7
+  
+  # Minimum detection area (in pixels) to filter small detections
+  min_detection_area: 500
+
+# Video processing settings
+video:
+  # Input video directory
+  input_dir: "footage"
+  
+  # Output directory for processed videos
+  output_dir: "data/output"
+  
+  # Video processing settings
+  fps: 30  # Output FPS (set to None to match input)
+  resolution:  # (width, height) - set to None to match input
+    width: null
+    height: null
+  
+  # Frame sampling (process every Nth frame for speed)
+  frame_skip: 1
+  
+  # Video format
+  fourcc: "mp4v"  # Codec for output video
+
+# Detection filter settings
+filter:
+  # Filter by class - COCO classes include: person, bicycle, car, motorcycle, bus, truck
+  # For F1, we'll filter for 'car' and similar vehicle classes
+  vehicle_classes: ["car", "motorcycle", "bus", "truck"]
+  
+  # Track multiple detections
+  max_detections: 10
+  
+  # Non-maximum suppression threshold
+  nms_threshold: 0.4
+
+# Pixel manipulation settings
+manipulation:
+  # What type of manipulation to apply
+  # Options: "background_blur", "isolate_vehicle", "colorize", "track"
+  mode: "isolate_vehicle"
+  
+  # If blurring background, kernel size
+  blur_kernel_size: 15
+
+# Output visualization
+visualization:
+  # Draw bounding boxes
+  draw_boxes: true
+  
+  # Draw masks
+  draw_masks: true
+  
+  # Confidence score display
+  draw_scores: true
+  
+  # Mask color (RGB)
+  mask_color: [255, 0, 0]
+  
+  # Box color (RGB)
+  box_color: [0, 255, 0]
+  
+  # Mask opacity (0.0 to 1.0)
+  mask_opacity: 0.3
+
+# Logging and debugging
+debug:
+  # Save intermediate frames
+  save_intermediate_frames: false
+  
+  # Intermediate frames directory
+  intermediate_dir: "data/intermediate"
+  
+  # Print frame-by-frame progress
+  verbose: true
+  
+  # Display frames during processing (requires GUI)
+  show_preview: false
+

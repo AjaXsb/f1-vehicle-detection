@@ -1,8 +1,8 @@
 # Custom
 footage/*
 !footage/file-hashes.txt
-
-
+data/weights/*
+data/output/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
